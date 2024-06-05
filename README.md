@@ -63,7 +63,7 @@ Rscript ${dir}/src/create_region_map.R --dir=${dir} --size 25e6 --resource_dir=$
 Uses `haptools simgenotype` to simulate the genotypes ([link](https://haptools.readthedocs.io/en/stable/commands/simgenotype.html)).
 
 Default (not specified):
-- `--haptools_seed=159`
+- `--haptools_seed=5`
 
 ```bash
 for chrom in {1..22}; do
@@ -77,6 +77,7 @@ Uses `haptools simphenotype` ([link](https://haptools.readthedocs.io/en/stable/c
 
 ```bash
 region_map="${dir}/region_map"
+haptools_seed=5
 
 for id in $(echo ${ids} | tr "," " "); do
     out_pmerge="${dir}/pmerge_${id}"
@@ -128,7 +129,7 @@ Rscript ${dir}/src/create_betas.R --dir=${dir} --resource_dir=${resource_dir}
 Default (not specified):
 - `--p="0.001,0.01,0.1,0.5"`
 - `--h2="0.05,0.1,0.25,0.5,0.8"`
-- `--haptools_seed=159`
+- `--haptools_seed=5`
 - `--seed=5` (`R` seed)
 
 ```bash
