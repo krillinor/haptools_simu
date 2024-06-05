@@ -5,7 +5,7 @@ git clone https://github.com/krillinor/haptools_simu.git
 cd haptools_simu
 ```
 
-Simulate genotypes from 1KG (possibly admixed genomes) and phenotypes.
+Simulates genotypes from 1KG (HM3 SNPs, possibly admixed genomes) and phenotypes.
 
 NB: `haptools` is really high memory usage when >=50K samples... f.x., preallocates up to 200GB...
 
@@ -14,7 +14,7 @@ NB: `haptools` is really high memory usage when >=50K samples... f.x., prealloca
 1. [haptools](https://haptools.readthedocs.io)
 2. `R` $\geq$ 4.1 and `Rscript` in path
 3.  `R` libraries
-	- `bigsnpr` (`remotes::install_github("privefl/bigsnpr"`)
+    - `bigsnpr` (must use `remotes::install_github("privefl/bigsnpr")`)
 	- `data.table`
 	- `docopt`
 	- `fs`
