@@ -54,7 +54,7 @@ haptools_path="/home/kristjan/.local/bin/haptools"
 `haptools` uses a lot of memory when simulating from whole chromosomes, so we partition each chromosome by f.x. 25MB.
 
 ```bash
-Rscript ${dir}/src/create_region_map.R --dir=${PWD} --size 25e6 --resource_dir=${resource_dir}
+Rscript ${dir}/src/create_region_map.R --dir=${dir} --size 25e6 --resource_dir=${resource_dir}
 ```
 
 ### 3. Simulate genotypes
@@ -132,7 +132,7 @@ Default (not specified):
 - `--seed=5` (`R` seed)
 
 ```bash
-Rscript ${dir}/src/sim_phenos.R --dir=${PWD} --ids=${ids} --haptools_path=${haptools_path}
+Rscript ${dir}/src/sim_phenos.R --dir=${dir} --ids=${ids} --haptools_path=${haptools_path}
 ```
 
 ## Setup (download resources)
