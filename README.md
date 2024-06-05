@@ -15,16 +15,16 @@ NB: `haptools` is really high memory usage when >=50K samples... f.x., prealloca
 2. `R` $\geq$ 4.1 and `Rscript` in path
 3.  `R` libraries
     - `bigsnpr` (must use `remotes::install_github("privefl/bigsnpr")`)
-	- `data.table`
-	- `docopt`
-	- `fs`
-	- `stringr`
+    - `data.table`
+    - `docopt`
+    - `fs`
+    - `stringr`
 4. `plink2`
-	```bash
-	wget https://s3.amazonaws.com/plink2-assets/alpha5/plink2_linux_x86_64_20240526.zip
-	unzip plink2_linux_x86_64_20240526.zip
-	rm plink2_linux_x86_64_20240526.zip
-	```
+    ```bash
+    wget https://s3.amazonaws.com/plink2-assets/alpha5/plink2_linux_x86_64_20240526.zip
+    unzip plink2_linux_x86_64_20240526.zip
+    rm plink2_linux_x86_64_20240526.zip
+    ```
 
 ## Example simulation
 
@@ -49,6 +49,7 @@ dir=${PWD}
 ids="ceu"  # corresponding to the model_${ID}.dat, possibly a list, f.x., "ceu,yri"
 resource_dir="/home/kristjan/work/haptools_simu"
 haptools_path="/home/kristjan/.local/bin/haptools"
+plink2="/home/kristjan/work/haptools_simu/plink2"
 ```
 
 `haptools` uses a lot of memory when simulating from whole chromosomes, so we partition each chromosome by f.x. 25MB.
@@ -66,7 +67,7 @@ Default (not specified):
 
 ```bash
 for chrom in {1..22}; do
-	Rscript ${dir}/src/sim_genos.R --dir=${dir} --ids=${ids} --chrom=${chrom} --haptools_path=${haptools_path} --resource_dir=${resource_dir}
+    Rscript ${dir}/src/sim_genos.R --dir=${dir} --ids=${ids} --chrom=${chrom} --haptools_path=${haptools_path} --resource_dir=${resource_dir}
 done
 ```
 
@@ -76,15 +77,14 @@ Uses `haptools simphenotype` ([link](https://haptools.readthedocs.io/en/stable/c
 
 ```bash
 region_map="${dir}/region_map"
-plink2="${dir}/plink2"
 
 for id in $(echo ${ids} | tr "," " "); do
-	out_pmerge="${dir}/pmerge_${id}"
-	out_pgen="${dir}/${id}_genos/${id}_hseed${haptools_seed}"
-	awk -v OFS='' -v id=${id} -v haptools_seed=${haptools_seed} '{print id,"_genos/",id,"_",$0,"_hseed",haptools_seed}' ${region_map} > ${out_pmerge}
-	${plink2} --pmerge-list ${out_pmerge} --make-pfile --out ${out_pgen}
-	rm ${out_pgen}-merge.*
-	${plink2} --pfile ${id} --out ${id} --freq
+    out_pmerge="${dir}/pmerge_${id}"
+    out_pgen="${dir}/${id}_genos/${id}_hseed${haptools_seed}"
+    awk -v OFS='' -v id=${id} -v haptools_seed=${haptools_seed} '{print id,"_genos/",id,"_",$0,"_hseed",haptools_seed}' ${region_map} > ${out_pmerge}
+    ${plink2} --pmerge-list ${out_pmerge} --make-pfile --out ${out_pgen}
+    rm ${out_pgen}-merge.*
+    ${plink2} --pfile ${id} --out ${id} --freq
 done
 ```
 
@@ -92,9 +92,9 @@ Remove the intermediate files (but keep the `*.bp` files)
 
 ```bash
 for id in $(echo ${ids} | tr "," " "); do
-	rm ${dir}/${id}_genos/${id}_*:*.pgen
-	rm ${dir}/${id}_genos/${id}_*:*.pvar
-	rm ${dir}/${id}_genos/${id}_*:*.psam
+    rm ${dir}/${id}_genos/${id}_*:*.pgen
+    rm ${dir}/${id}_genos/${id}_*:*.pvar
+    rm ${dir}/${id}_genos/${id}_*:*.psam
 done
 ```
 
@@ -173,7 +173,7 @@ wget https://raw.githubusercontent.com/CAST-genomics/haptools/main/example-files
 
 ```bash
 wget https://www.dropbox.com/s/rhi806sstvppzzz/snpinfo_mult_1kg_hm3
-    
+
 # linux
 wget https://hgdownload.cse.ucsc.edu/admin/exe/linux.x86_64/liftOver
 chmod +x liftOver
