@@ -45,7 +45,7 @@ echo -e "${n_samples} Admixed CEU YRI\n1 0 1 0" > model_${ID}.dat
 Assign variables for the next steps (must modify based on current environment).
 
 ```bash
-dir=${PWD}
+dir="/home/kristjan/work/haptools_simu"
 ids="ceu"  # corresponding to the model_${ID}.dat, possibly a list, f.x., "ceu,yri"
 resource_dir="/home/kristjan/work/haptools_simu"
 haptools_path="/home/kristjan/.local/bin/haptools"
