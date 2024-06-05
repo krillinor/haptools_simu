@@ -15,7 +15,7 @@ Options:
   --chrom=<chrom>                  Chromosome (1-22).
   --haptools_seed=<seed>           haptools seed [default: 5].
   --haptools_path=<haptools_path>  haptools path [default: haptools].
-  --resource_dir=<resource_dir>    Directory with resources, f.x. 1KG pgen files. Assumes working dir. if not specified [default: NULL].
+  --resource_dir=<resource_dir>    Directory with resource. Assumes working dir. if not specified [default: NULL].
   -h --help                        Show this screen.
 
 " -> doc

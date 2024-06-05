@@ -17,6 +17,10 @@ Options:
 
 a <- docopt(doc)
 
+if (a$resource_dir == "NULL") {
+    a$resource_dir <- a$dir
+}
+
 d <- fread(str_glue("{a$resource_dir}/snpinfo_mult_1kg_hm3"))
 setnames(d, old = c("CHR", "BP"), new = c("chr", "pos"))
 

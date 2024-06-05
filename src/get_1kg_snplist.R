@@ -10,7 +10,7 @@ Usage:
 
 Options:
   --dir=<dir>                    Working directory.
-  --resource_dir=<resource_dir>  Directory with resource. Assumes working dir. if not specified [default: NULL].
+  --resource_dir=<resource_dir>  Directory with resources, f.x. 1KG pgen files. Assumes working dir. if not specified [default: NULL].
   -h --help                      Show this screen.
 
 " -> doc
