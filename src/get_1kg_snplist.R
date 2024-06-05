@@ -24,7 +24,7 @@ if (a$resource_dir == "NULL") {
 hm3 <- fread(str_glue("{a$resource_dir}/snpinfo_mult_1kg_hm3_hg38"))
 hm3$chr <- as.character(hm3$chr)
 
-pvar_1kg <- fread(str_glue("grep -v \"##\" {a$resource_dir}/all_hg38_qc.pvar"))
+pvar_1kg <- fread(str_glue("grep -v \"##\" {a$resource_dir}/all_hg38.pvar"))
 
 hm3_a <- hm3[pvar_1kg, on = c(chr = "#CHROM", pos = "POS", A1 = "REF", A2 = "ALT"), nomatch = 0]
 hm3_b <- hm3[pvar_1kg, on = c(chr = "#CHROM", pos = "POS", A1 = "ALT", A2 = "REF"), nomatch = 0]
