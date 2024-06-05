@@ -26,62 +26,9 @@ NB: `haptools` is really high memory usage when >=50K samples... f.x., prealloca
 	rm plink2_linux_x86_64_20240526.zip
 	```
 
-## Setup (download resources)
-
-It's not necessary to run the following setup steps if they exist somewhere.
-
-Use `--resource_dir` in the `R` scripts in the example to point to the directory with the resources.
-
-### Get map files
-
-```bash
-wget https://bochet.gcc.biostat.washington.edu/beagle/genetic_maps/plink.GRCh38.map.zip
-unzip plink.GRCh38.map.zip
-rm plink.GRCh38.map.zip
-mkdir map
-mv plink.* map
-```
-
-### Get 1KG pgen
-
-```bash
-wget https://www.dropbox.com/s/j72j6uciq5zuzii/all_hg38.pgen.zst
-wget https://www.dropbox.com/s/ngbo2xm5ojw9koy/all_hg38_noannot.pvar.zst
-wget https://www.dropbox.com/s/2e87z6nc4qexjjm/hg38_corrected.psam
-./plink2 --zst-decompress all_hg38.pgen.zst > all_hg38.pgen
-./plink2 --zst-decompress all_hg38_noannot.pvar.zst > all_hg38.pvar
-mv hg38_corrected.psam all_hg38.psam
-rm *.zst
-```
-
-### Get 1KG sampleinfo
-
-```bash
-wget https://raw.githubusercontent.com/CAST-genomics/haptools/main/example-files/1000genomes_sampleinfo.tsv
-```
-
-### Get HM3 SNPs and liftover to hg38
-
-```bash
-wget https://www.dropbox.com/s/rhi806sstvppzzz/snpinfo_mult_1kg_hm3
-    
-# linux
-wget https://hgdownload.cse.ucsc.edu/admin/exe/linux.x86_64/liftOver
-chmod +x liftOver
-
-Rscript ./src/hm3_to_hg38.R --dir=${PWD}
-```
-### Filter 1KG
-
-```bash
-Rscript ./src/get_1kg_snplist.R --dir=${PWD}
-
-./plink2 --pfile all_hg38 --out all_hg38_qc --make-pfile --allow-extra-chr --extract hm3_use
-```
-
 ## Example simulation
 
-It's not necessary to download the resources ([see above](#setup-download-resources)). Use `--resource_dir` in the `R` scripts below to point to the resource_directory ([see above](#setup-download-resources)).
+Use `--resource_dir` in the `R` scripts below to point to the resource directory. Otherwise, follow ([these steps](#setup-download-resources)) to download them.
 
 ### 1. Create a model file
 
@@ -186,6 +133,59 @@ Default (not specified):
 
 ```bash
 Rscript ${dir}/src/sim_phenos.R --dir=${PWD} --ids=${ids} --haptools_path=${haptools_path}
+```
+
+## Setup (download resources)
+
+It's not necessary to run the following setup steps if they exist somewhere.
+
+Use `--resource_dir` in the `R` scripts in the example to point to the directory with the resources.
+
+### Get map files
+
+```bash
+wget https://bochet.gcc.biostat.washington.edu/beagle/genetic_maps/plink.GRCh38.map.zip
+unzip plink.GRCh38.map.zip
+rm plink.GRCh38.map.zip
+mkdir map
+mv plink.* map
+```
+
+### Get 1KG pgen
+
+```bash
+wget https://www.dropbox.com/s/j72j6uciq5zuzii/all_hg38.pgen.zst
+wget https://www.dropbox.com/s/ngbo2xm5ojw9koy/all_hg38_noannot.pvar.zst
+wget https://www.dropbox.com/s/2e87z6nc4qexjjm/hg38_corrected.psam
+./plink2 --zst-decompress all_hg38.pgen.zst > all_hg38.pgen
+./plink2 --zst-decompress all_hg38_noannot.pvar.zst > all_hg38.pvar
+mv hg38_corrected.psam all_hg38.psam
+rm *.zst
+```
+
+### Get 1KG sampleinfo
+
+```bash
+wget https://raw.githubusercontent.com/CAST-genomics/haptools/main/example-files/1000genomes_sampleinfo.tsv
+```
+
+### Get HM3 SNPs and liftover to hg38
+
+```bash
+wget https://www.dropbox.com/s/rhi806sstvppzzz/snpinfo_mult_1kg_hm3
+    
+# linux
+wget https://hgdownload.cse.ucsc.edu/admin/exe/linux.x86_64/liftOver
+chmod +x liftOver
+
+Rscript ./src/hm3_to_hg38.R --dir=${PWD}
+```
+### Filter 1KG
+
+```bash
+Rscript ./src/get_1kg_snplist.R --dir=${PWD}
+
+./plink2 --pfile all_hg38 --out all_hg38_qc --make-pfile --allow-extra-chr --extract hm3_use
 ```
 
 ## Possible TODOs
