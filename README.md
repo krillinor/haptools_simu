@@ -93,9 +93,9 @@ Remove the intermediate files (but keep the `*.bp` files)
 
 ```bash
 for id in $(echo ${ids} | tr "," " "); do
-    rm ${dir}/${id}_genos/${id}_*:*.pgen
-    rm ${dir}/${id}_genos/${id}_*:*.pvar
-    rm ${dir}/${id}_genos/${id}_*:*.psam
+    rm ${dir}/${id}_genos/${id}_*:*_hseed${haptools_seed}.pgen
+    rm ${dir}/${id}_genos/${id}_*:*_hseed${haptools_seed}.pvar
+    rm ${dir}/${id}_genos/${id}_*:*_hseed${haptools_seed}.psam
 done
 ```
 
