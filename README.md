@@ -73,8 +73,6 @@ done
 
 ### 4. Merge genotypes into a single file
 
-Uses `haptools simphenotype` ([link](https://haptools.readthedocs.io/en/stable/commands/simphenotype.html)) to simulate phenotypes from the causal effects created with `./src/create_betas.R`. `haptools simphenotypes` adds the environmental effect and scales according to the specified heritability.
-
 ```bash
 region_map="${dir}/region_map"
 
@@ -123,6 +121,8 @@ Rscript ${dir}/src/create_betas.R --dir=${dir} --seed=${r_seed} --resource_dir=$
 ```
 
 ### 6. Simulate phenotypes
+
+Uses `haptools simphenotype` ([link](https://haptools.readthedocs.io/en/stable/commands/simphenotype.html)) to simulate phenotypes from the causal effects created with `./src/create_betas.R`. `haptools simphenotypes` adds the environmental effect and scales according to the specified heritability.
 
 Default:
 - `--p="0.001,0.01,0.1,0.5"`
