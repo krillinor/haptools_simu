@@ -85,7 +85,7 @@ for id in $(echo ${ids} | tr "," " "); do
     awk -v OFS='' -v id=${id} -v haptools_seed=${haptools_seed} '{print id,"_genos/",id,"_",$0,"_hseed",haptools_seed}' ${region_map} > ${out_pmerge}
     ${plink2} --pmerge-list ${out_pmerge} --make-pfile --out ${out_pgen}
     rm ${out_pgen}-merge.*
-    ${plink2} --pfile ${id} --out ${id} --freq
+    ${plink2} --pfile ${out_pgen} --out ${out_pgen} --freq
 done
 ```
 
