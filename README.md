@@ -47,7 +47,10 @@ Assign variables for the next steps (must modify based on current environment).
 ```bash
 dir="/home/kristjan/work/haptools_simu"
 ids="ceu"  # corresponding to the model_${ID}.dat, possibly a list, f.x., "ceu,yri"
+r_seed=159  # for reproducibility
+haptools_seed=5  # for reproducibility
 resource_dir="/home/kristjan/work/haptools_simu"
+
 haptools_path="/home/kristjan/.local/bin/haptools"
 plink2="/home/kristjan/work/haptools_simu/plink2"
 ```
@@ -62,12 +65,9 @@ Rscript ${dir}/src/create_region_map.R --dir=${dir} --size 25e6 --resource_dir=$
 
 Uses `haptools simgenotype` to simulate the genotypes ([link](https://haptools.readthedocs.io/en/stable/commands/simgenotype.html)).
 
-Default (not specified):
-- `--haptools_seed=5`
-
 ```bash
 for chrom in {1..22}; do
-    Rscript ${dir}/src/sim_genos.R --dir=${dir} --ids=${ids} --chrom=${chrom} --haptools_path=${haptools_path} --resource_dir=${resource_dir}
+    Rscript ${dir}/src/sim_genos.R --dir=${dir} --ids=${ids} --chrom=${chrom} --haptools_seed=${haptools_seed} --haptools_path=${haptools_path} --resource_dir=${resource_dir}
 done
 ```
 
@@ -77,7 +77,6 @@ Uses `haptools simphenotype` ([link](https://haptools.readthedocs.io/en/stable/c
 
 ```bash
 region_map="${dir}/region_map"
-haptools_seed=5
 
 for id in $(echo ${ids} | tr "," " "); do
     out_pmerge="${dir}/pmerge_${id}"
@@ -115,25 +114,22 @@ $$
 
 (Might be interesting to add local haplotype effects / cross-ancestry genetic correlations / larger effects for rarer variants...)
 
-Default (not specified):
+Default:
 - `--p="0.001,0.01,0.1,0.5"`
 - `--h2="0.05,0.1,0.25,0.5,0.8"`
-- `--seed=5` (`R` seed)
 
 ```bash
-Rscript ${dir}/src/create_betas.R --dir=${dir} --resource_dir=${resource_dir}
+Rscript ${dir}/src/create_betas.R --dir=${dir} --seed=${r_seed} --resource_dir=${resource_dir}
 ```
 
 ### 6. Simulate phenotypes
 
-Default (not specified):
+Default:
 - `--p="0.001,0.01,0.1,0.5"`
 - `--h2="0.05,0.1,0.25,0.5,0.8"`
-- `--haptools_seed=5`
-- `--seed=5` (`R` seed)
 
 ```bash
-Rscript ${dir}/src/sim_phenos.R --dir=${dir} --ids=${ids} --haptools_path=${haptools_path}
+Rscript ${dir}/src/sim_phenos.R --dir=${dir} --ids=${ids} --seed=${r_seed} --haptools_seed=${haptools_seed} --haptools_path=${haptools_path}
 ```
 
 ## Setup (download resources)
